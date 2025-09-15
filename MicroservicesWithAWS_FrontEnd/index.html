@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-suave">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta
+      name="description"
+      content="Sistema de reservas de hotel desenvolvido com microserviços .NET e AWS. Encontre e reserve os melhores hotéis com facilidade."
+    />
+    <meta
+      name="keywords"
+      content="hotel, reservas, microserviços, AWS, .NET, booking"
+    />
+    <meta name="author" content="Danilo Silva" />
+
+    <title>HotelBooking - Sistema de Reservas de Hotel</title>
+
+    <!-- Preconnect para otimização de performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+      integrity="sha512-t4GWSVZO1eC8BM339Xd7Uphw5s17a86tIZIj8qRxhnKub6WoyhnrxeCIMeAqBPgdZGlCcG2PrZjMc+Wr78+5Xg=="
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Estilos customizados -->
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <!-- Botões de Autenticação -->
+    <nav
+      class="botoes-autenticacao"
+      role="navigation"
+      aria-label="Autenticação"
+    >
+      <button
+        id="btnEntrar"
+        class="botao-customizado botao--contorno me-2"
+        type="button"
+        aria-label="Fazer login no sistema"
+      >
+        <i class="fas fa-sign-in-alt me-2" aria-hidden="true"></i>
+        Entrar
+      </button>
+      <button
+        id="btnSair"
+        class="botao-customizado botao--contorno"
+        type="button"
+        style="display: none"
+        aria-label="Sair do sistema"
+      >
+        <i class="fas fa-sign-out-alt me-2" aria-hidden="true"></i>
+        Sair
+      </button>
+    </nav>
+
+    <!-- Seção Principal (Hero) -->
+    <section class="secao-principal" role="banner">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="secao-principal__conteudo">
+              <h1 class="secao-principal__titulo">
+                <i class="fas fa-hotel me-3" aria-hidden="true"></i>
+                HotelBooking
+              </h1>
+              <p class="secao-principal__subtitulo">
+                Encontre e reserve os melhores hotéis com facilidade. Sistema
+                completo de reservas com tecnologia AWS e microserviços.
+              </p>
+              <div class="d-flex flex-column flex-sm-row gap-3">
+                <a
+                  href="#funcionalidades"
+                  class="botao-customizado botao--primario"
+                  role="button"
+                  aria-label="Explorar funcionalidades do sistema"
+                >
+                  <i class="fas fa-search me-2" aria-hidden="true"></i>
+                  Explorar Funcionalidades
+                </a>
+                <a
+                  href="#estatisticas"
+                  class="botao-customizado botao--contorno"
+                  role="button"
+                  aria-label="Ver estatísticas do sistema"
+                >
+                  <i class="fas fa-chart-bar me-2" aria-hidden="true"></i>
+                  Ver Estatísticas
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="secao-principal__imagem">
+              <i
+                class="secao-principal__icone fas fa-building"
+                aria-hidden="true"
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção de Funcionalidades -->
+    <section id="funcionalidades" class="secao-funcionalidades">
+      <div class="container">
+        <header class="secao-funcionalidades__cabecalho">
+          <h2 class="secao-funcionalidades__titulo">
+            Funcionalidades do Sistema
+          </h2>
+          <p class="secao-funcionalidades__descricao">
+            Tudo que você precisa para gerenciar reservas de hotéis com
+            eficiência
+          </p>
+        </header>
+
+        <div class="row g-4">
+          <div class="col-md-4">
+            <article class="cartao-funcionalidade">
+              <div class="cartao-funcionalidade__icone">
+                <i class="fas fa-search" aria-hidden="true"></i>
+              </div>
+              <h3 class="cartao-funcionalidade__titulo">Busca Avançada</h3>
+              <p class="cartao-funcionalidade__descricao">
+                Encontre hotéis por localização, preço, comodidades e
+                disponibilidade em tempo real.
+              </p>
+            </article>
+          </div>
+
+          <div class="col-md-4">
+            <article class="cartao-funcionalidade">
+              <div class="cartao-funcionalidade__icone">
+                <i class="fas fa-calendar-check" aria-hidden="true"></i>
+              </div>
+              <h3 class="cartao-funcionalidade__titulo">Reservas Online</h3>
+              <p class="cartao-funcionalidade__descricao">
+                Sistema completo de reservas com confirmação instantânea e
+                gestão automática de disponibilidade.
+              </p>
+            </article>
+          </div>
+
+          <div class="col-md-4">
+            <article class="cartao-funcionalidade">
+              <div class="cartao-funcionalidade__icone">
+                <i class="fas fa-users-cog" aria-hidden="true"></i>
+              </div>
+              <h3 class="cartao-funcionalidade__titulo">
+                Gestão Multi-usuário
+              </h3>
+              <p class="cartao-funcionalidade__descricao">
+                Diferentes níveis de acesso: clientes, gerentes de hotel e
+                administradores do sistema.
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção de Estatísticas -->
+    <section id="estatisticas" class="secao-estatisticas">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 col-6 mb-4">
+            <div class="item-estatistica">
+              <span class="item-estatistica__numero">500+</span>
+              <span class="item-estatistica__rotulo">Hotéis Parceiros</span>
+            </div>
+          </div>
+          <div class="col-md-3 col-6 mb-4">
+            <div class="item-estatistica">
+              <span class="item-estatistica__numero">10k+</span>
+              <span class="item-estatistica__rotulo">Reservas Realizadas</span>
+            </div>
+          </div>
+          <div class="col-md-3 col-6 mb-4">
+            <div class="item-estatistica">
+              <span class="item-estatistica__numero">50+</span>
+              <span class="item-estatistica__rotulo">Cidades</span>
+            </div>
+          </div>
+          <div class="col-md-3 col-6 mb-4">
+            <div class="item-estatistica">
+              <span class="item-estatistica__numero">24/7</span>
+              <span class="item-estatistica__rotulo">Suporte</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scripts -->
+    <!-- jQuery -->
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <!-- Bootstrap JavaScript -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"
+      integrity="sha512-VK2zcvntEufaimc+efOYi622VN5ZacdnufnmX7zIhCPmjhKnOi9ZDMtg1/ug5l183f19gG1/cBstPO4D8N/Img=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <!-- Aplicação principal -->
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>
