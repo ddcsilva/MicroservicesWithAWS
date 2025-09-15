@@ -72,15 +72,26 @@ const SistemaHotelBooking = {
    */
   inicializarAutenticacao() {
     try {
-      // Verifica se cognitoApp está disponível
-      if (typeof cognitoApp !== 'undefined') {
-        cognitoApp.Init();
+      // Verifica se cognitoApp e suas dependências estão disponíveis
+      if (
+        typeof cognitoApp !== 'undefined' &&
+        typeof AmazonCognitoIdentity !== 'undefined'
+      ) {
+        console.log('Inicializando sistema de autenticação AWS Cognito...');
+        cognitoApp.inicializar();
+        console.log('Sistema de autenticação inicializado com sucesso');
+      } else {
+        console.warn('Dependências do AWS Cognito não encontradas');
       }
 
       this.atualizarBotoesAutenticacao();
       this.tratarNavegacaoUsuario();
     } catch (erro) {
-      console.warn('Sistema de autenticação não disponível:', erro.message);
+      console.error(
+        'Erro ao inicializar sistema de autenticação:',
+        erro.message
+      );
+      // Fallback: continua sem autenticação
       this.atualizarBotoesAutenticacao();
     }
   },
