@@ -56,11 +56,37 @@ const cognitoApp = {
           console.error('Falha na autenticação:', erro);
         },
       };
-
-      console.log('Configuração do Cognito inicializada');
     } catch (erro) {
       console.error('Erro ao inicializar Cognito:', erro.message);
       throw erro;
     }
+  },
+
+  /**
+   * Processa resposta do Cognito na URL
+   */
+  processarResposta: function () {
+    cognitoApp.autenticacao.parseCognitoWebResponse(window.location.href);
+  },
+
+  /**
+   * Obtém usuário atual
+   */
+  obterUsuarioAtual: function () {
+    return cognitoApp.autenticacao.getCurrentUser();
+  },
+
+  /**
+   * Faz login
+   */
+  fazerLogin: function () {
+    cognitoApp.autenticacao.getSession();
+  },
+
+  /**
+   * Faz logout
+   */
+  fazerLogout: function () {
+    cognitoApp.autenticacao.signOut();
   },
 };

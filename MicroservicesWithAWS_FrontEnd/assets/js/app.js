@@ -39,8 +39,6 @@ const SistemaHotelBooking = {
     this.inicializarAutenticacao();
     this.configurarScrollSuave();
     this.configurarAnimacoesScroll();
-
-    console.log('Sistema HotelBooking inicializado com sucesso');
   },
 
   /**
@@ -48,23 +46,14 @@ const SistemaHotelBooking = {
    */
   configurarEventListeners() {
     // Event listeners para botões de autenticação
-    $(this.seletores.botaoEntrar).on(
-      'click',
-      this.tratarCliqueBotaoEntrar.bind(this)
-    );
-    $(this.seletores.botaoSair).on(
-      'click',
-      this.tratarCliqueBotaoSair.bind(this)
-    );
+    $(this.seletores.botaoEntrar).on('click', this.tratarCliqueBotaoEntrar.bind(this));
+    $(this.seletores.botaoSair).on('click', this.tratarCliqueBotaoSair.bind(this));
 
     // Event listener para scroll
     $(window).on('scroll', this.tratarScroll.bind(this));
 
     // Event listeners para botões de autenticação (loading state)
-    $(this.seletores.botoesAutenticacao).on(
-      'click',
-      this.mostrarCarregamentoBotao.bind(this)
-    );
+    $(this.seletores.botoesAutenticacao).on('click', this.mostrarCarregamentoBotao.bind(this));
   },
 
   /**
@@ -73,24 +62,23 @@ const SistemaHotelBooking = {
   inicializarAutenticacao() {
     try {
       // Verifica se cognitoApp e suas dependências estão disponíveis
-      if (
-        typeof cognitoApp !== 'undefined' &&
-        typeof AmazonCognitoIdentity !== 'undefined'
-      ) {
-        console.log('Inicializando sistema de autenticação AWS Cognito...');
+      if (typeof cognitoApp !== 'undefined' && typeof AmazonCognitoIdentity !== 'undefined') {
         cognitoApp.inicializar();
-        console.log('Sistema de autenticação inicializado com sucesso');
+
+        // Processa resposta do Cognito na URL (do curso)
+        cognitoApp.processarResposta();
+
+        // Verifica usuário atual
+        const usuarioAtual = cognitoApp.obterUsuarioAtual();
+        console.log('Usuário atual:', usuarioAtual);
       } else {
-        console.warn('Dependências do AWS Cognito não encontradas');
+        console.warn('⚠️ Dependências do AWS Cognito não encontradas');
       }
 
       this.atualizarBotoesAutenticacao();
       this.tratarNavegacaoUsuario();
     } catch (erro) {
-      console.error(
-        'Erro ao inicializar sistema de autenticação:',
-        erro.message
-      );
+      console.error('Erro ao inicializar sistema de autenticação:', erro.message);
       // Fallback: continua sem autenticação
       this.atualizarBotoesAutenticacao();
     }
@@ -349,9 +337,7 @@ const SistemaHotelBooking = {
 
     $botao
       .prop('disabled', true)
-      .html(
-        '<i class="fas fa-spinner animacao-girar me-2" aria-hidden="true"></i>Processando...'
-      );
+      .html('<i class="fas fa-spinner animacao-girar me-2" aria-hidden="true"></i>Processando...');
 
     // Reset do botão após timeout (fallback)
     setTimeout(() => {
@@ -365,10 +351,11 @@ const SistemaHotelBooking = {
    */
   tratarCliqueBotaoEntrar(evento) {
     evento.preventDefault();
-    console.log('Botão de entrar clicado');
 
-    // Aqui seria implementada a lógica de login
-    // Por enquanto, apenas log para debug
+    // Usa função do curso para fazer login
+    if (typeof cognitoApp !== 'undefined') {
+      cognitoApp.fazerLogin();
+    }
   },
 
   /**
@@ -377,10 +364,11 @@ const SistemaHotelBooking = {
    */
   tratarCliqueBotaoSair(evento) {
     evento.preventDefault();
-    console.log('Botão de sair clicado');
 
-    // Aqui seria implementada a lógica de logout
-    // Por enquanto, apenas log para debug
+    // Usa função do curso para fazer logout
+    if (typeof cognitoApp !== 'undefined') {
+      cognitoApp.fazerLogout();
+    }
   },
 };
 
