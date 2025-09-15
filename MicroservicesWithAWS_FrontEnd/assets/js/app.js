@@ -39,6 +39,11 @@ const SistemaHotelBooking = {
     this.inicializarAutenticacao();
     this.configurarScrollSuave();
     this.configurarAnimacoesScroll();
+
+    // Processa página carregada (do curso)
+    if (typeof cognitoApp !== 'undefined' && cognitoApp.processarPaginaCarregada) {
+      cognitoApp.processarPaginaCarregada();
+    }
   },
 
   /**

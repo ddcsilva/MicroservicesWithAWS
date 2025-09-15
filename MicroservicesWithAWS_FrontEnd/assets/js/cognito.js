@@ -5,6 +5,26 @@
  */
 
 /**
+ * Função para decodificar JWT
+ */
+function decodificarJWT(token) {
+  const base64Url = token.split('.')[1];
+  const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+  const jsonPayload = decodeURIComponent(
+    atob(base64)
+      .split('')
+      .map(function (c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      })
+      .join('')
+  );
+  return JSON.parse(jsonPayload);
+}
+
+// Token do usuário atual
+let tokenUsuarioAtual = null;
+
+/**
  * Configuração do AWS Cognito
  * Sistema de autenticação para HotelBooking
  */
@@ -88,5 +108,31 @@ const cognitoApp = {
    */
   fazerLogout: function () {
     cognitoApp.autenticacao.signOut();
+  },
+
+  /**
+   * Processa página após carregamento (do curso)
+   */
+  processarPaginaCarregada: function () {
+    cognitoApp.autenticacao.parseCognitoWebResponse(window.location.href);
+    const usuarioAtual = cognitoApp.autenticacao.getCurrentUser();
+
+    if (usuarioAtual) {
+      cognitoApp.autenticacao.getSession();
+      const sessaoAtual = cognitoApp.autenticacao.signInUserSession;
+
+      if (sessaoAtual) {
+        const detalhesToken = decodificarJWT(sessaoAtual.idToken.jwtToken);
+        const grupos = detalhesToken['cognito:groups'] ? detalhesToken['cognito:groups'][0] : '';
+
+        // Cria objeto de token
+        tokenUsuarioAtual = {
+          currentUserId: detalhesToken.sub || '',
+          role: grupos || '',
+        };
+
+        console.log('Token do usuário:', tokenUsuarioAtual);
+      }
+    }
   },
 };
